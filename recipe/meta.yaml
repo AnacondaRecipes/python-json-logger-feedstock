@@ -1,6 +1,6 @@
 {% set name = "python-json-logger" %}
-{% set version = "0.1.11" %}
-{% set sha256 = "b7a31162f2a01965a5efb94453ce69230ed208468b0bbc7fdfc56e6d8df2e281" %}
+{% set version = "2.0.0" %}
+{% set sha256 = "6c15023a8571200228472d4c9de7cb891cd45f670061f7729b8209bf643d5bbf" %}
 
 package:
   name: {{ name|lower }}
