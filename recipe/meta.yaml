@@ -1,16 +1,16 @@
 {% set name = "python-json-logger" %}
-{% set version = "2.0.7" %}
+{% set version = "3.2.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 23e7ec02d34237c5aa1e29a070193a4ea87583bb4e7f8fd06d3de8264c4b2e1c
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/python_json_logger-{{ version }}.tar.gz
+  sha256: 8eb0554ea17cb75b05d2848bc14fb02fbdbd9d6972120781b974380bfa162008
 
 build:
+  skip: true  # [py<38]
   number: 0
   script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation --ignore-installed . -vv
 
@@ -25,6 +25,7 @@ requirements:
     - wheel
   run:
     - python
+    - typing_extensions  # [py<310]
 
 test:
   imports:
@@ -35,17 +36,17 @@ test:
     - pip check
 
 about:
-  home: https://github.com/madzak/python-json-logger
+  home: https://nhairs.github.io/python-json-logger/latest
   license_file: LICENSE
   license: BSD-2-Clause
   license_family: BSD
-  summary: 'A python library adding a json log formatter'
+  summary: 'JSON Formatter for Python Logging'
   description: |
-      This library is provided to allow standard python logging to output log
-      data as json objects. With JSON we can make our logs more readable by
-      machines and we can stop writing custom parsers for syslog type records.
-  dev_url: https://github.com/madzak/python-json-logger
-  doc_url: https://github.com/madzak/python-json-logger/blob/master/README.md
+    Python JSON Logger enables you produce JSON logs when using Python's logging package.
+
+    JSON logs are machine readable allowing for much easier parsing and ingestion into log aggregation tools.
+  dev_url: https://github.com/nhairs/python-json-logger
+  doc_url: https://nhairs.github.io/python-json-logger/latest
 
 extra:
   recipe-maintainers:
