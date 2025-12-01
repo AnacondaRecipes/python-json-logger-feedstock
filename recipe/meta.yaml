@@ -1,13 +1,13 @@
 {% set name = "python-json-logger" %}
-{% set version = "3.2.1" %}
+{% set version = "4.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/python_json_logger-{{ version }}.tar.gz
-  sha256: 8eb0554ea17cb75b05d2848bc14fb02fbdbd9d6972120781b974380bfa162008
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: f58e68eb46e1faed27e0f574a55a0455eecd7b8a5b88b85a784519ba3cff047f
 
 build:
   skip: true  # [py<38]
@@ -15,9 +15,6 @@ build:
   script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation --ignore-installed . -vv
 
 requirements:
-  build:
-    - python
-    - pip
   host:
     - pip
     - python
@@ -28,19 +25,25 @@ requirements:
     - typing_extensions  # [py<310]
 
 test:
+  source_files:
+    - tests
   imports:
     - pythonjsonlogger
   requires:
     - pip
+    - pytest
+    - freezegun
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -v tests
 
 about:
   home: https://nhairs.github.io/python-json-logger/latest
   license_file: LICENSE
   license: BSD-2-Clause
   license_family: BSD
-  summary: 'JSON Formatter for Python Logging'
+  summary: JSON Formatter for Python Logging
   description: |
     Python JSON Logger enables you produce JSON logs when using Python's logging package.
 
