@@ -2,7 +2,7 @@
 {% set version = "4.1.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
@@ -10,8 +10,9 @@ source:
   sha256: b396b9e3ed782b09ff9d6e4f1683d46c83ad0d35d2e407c09a9ebbf038f88195
 
 build:
-  skip: true  # [py<310]
   number: 0
+  # upstream requires-python >=3.10
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation --ignore-installed . -vv
 
 requirements:
@@ -19,9 +20,9 @@ requirements:
     - pip
     - python
     - setuptools
+  # No run deps beyond python; optional orjson/msgspec live under upstream `dev` only (unbounded).
   run:
     - python
-    - typing_extensions  # [py<310]
 
 test:
   source_files:
