@@ -11,7 +11,6 @@ source:
 
 build:
   number: 0
-  # upstream requires-python >=3.10
   skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation --ignore-installed . -vv
 
@@ -20,7 +19,6 @@ requirements:
     - pip
     - python
     - setuptools
-  # No run deps beyond python; optional orjson/msgspec live under upstream `dev` only (unbounded).
   run:
     - python
 
