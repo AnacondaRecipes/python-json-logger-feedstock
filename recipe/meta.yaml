@@ -1,17 +1,17 @@
 {% set name = "python-json-logger" %}
-{% set version = "4.0.0" %}
+{% set version = "4.1.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: f58e68eb46e1faed27e0f574a55a0455eecd7b8a5b88b85a784519ba3cff047f
+  sha256: b396b9e3ed782b09ff9d6e4f1683d46c83ad0d35d2e407c09a9ebbf038f88195
 
 build:
-  skip: true  # [py<38]
   number: 0
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation --ignore-installed . -vv
 
 requirements:
@@ -19,10 +19,8 @@ requirements:
     - pip
     - python
     - setuptools
-    - wheel
   run:
     - python
-    - typing_extensions  # [py<310]
 
 test:
   source_files:
