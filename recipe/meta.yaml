@@ -34,7 +34,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v tests
+    - pytest -vv tests
 
 about:
   home: https://nhairs.github.io/python-json-logger/latest
